@@ -1,0 +1,214 @@
+/* dashboard.css */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.menu {
+  margin-top: 4rem;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #e3f2fd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.sidebar .menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar .menu li {
+  margin-bottom: 10px;
+}
+
+.sidebar .menu li a {
+  text-decoration: none;
+  color: #0f9491;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.sidebar .menu li a:hover,
+.sidebar .menu li a.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.sidebar .menu li a:hover {
+  color: #007bff;
+}
+
+.sidebar .logout {
+  color: #ff4d4f;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .logout a {
+  color: #ff4d4f;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.main-content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main-content .header .search {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.main-content .header .date-picker {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.main-content .stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.main-content .stats .stat {
+  width: 22%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-content .stats .stat h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #666;
+}
+
+.main-content .stats .stat p {
+  margin: 5px 0 0 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.main-content .stats .stat .small {
+  font-size: 14px;
+  color: #999;
+}
+
+.main-content .appointments {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-content .appointments table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-content .appointments table th,
+.main-content .appointments table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.main-content .appointments table th {
+  background-color: #f9fafb;
+}
+
+.main-content .appointments table tr:hover {
+  background-color: #f1f5f9;
+}
+
+.main-content .appointments table td .status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.main-content .appointments table td .status.new {
+  background-color: #e3f7e4;
+  color: #34c759;
+}
+
+.main-content .appointments table td .status.accepted {
+  background-color: #e6e9ff;
+  color: #6c63ff;
+}
+
+.main-content .appointments table td .status.completed {
+  background-color: #e5f7ff;
+  color: #007aff;
+}
+
+.main-content .appointments table td .status.cancelled {
+  background-color: #ffe6e6;
+  color: #ff3b30;
+}
+
+.main-content .appointments table td .status.rejected {
+  background-color: #ffefea;
+  color: #ff3b30;
+}
+
+.main-content .appointments table td .actions {
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.appointments thead{
+    height: 4rem;
+    margin-bottom: 2rem;
+}
+
+.appointment-tr td {
+  cursor: pointer;
+  padding-bottom: 2rem !important;
+}
+
+
+
+
+/* styles.css */
