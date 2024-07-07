@@ -1,6 +1,6 @@
 // AddPatientModal.jsx
-import React, { useState } from "react";
-import "./styles.css";
+import { useState } from "react";
+// import "./styles.css";
 import Modal from "./Modal";
 
 function AddPatientModal({ isOpen, closeModal, addPatient }) {
@@ -83,7 +83,7 @@ function AddPatientModal({ isOpen, closeModal, addPatient }) {
             required
           />
         </div>
-        <button type="submit">Add Patient</button>
+        <button className="text-[#000]" type="submit">Add Patient</button>
       </form>
     </Modal>
   );

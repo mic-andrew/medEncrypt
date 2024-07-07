@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./auth.css";
 import { useNavigate } from "react-router";
+import Header from "../components/Header/Header";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ function Login() {
 
   const staticEmail = "test@example.com";
   const staticPassword = "password123";
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     setError("");
@@ -19,7 +20,7 @@ function Login() {
     setTimeout(() => {
       if (email === staticEmail && password === staticPassword) {
         alert("Login successful");
-        navigate("/dashboard")
+        navigate("/dashboard");
       } else {
         setError("Invalid email or password");
       }
@@ -28,31 +29,34 @@ function Login() {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <h2>Login</h2>
-        {error && <p className="error">{error}</p>}
-        <div className="input-group">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+    <>
+      <Header />
+      <div className="container">
+        <div className="card">
+          <h2>Login</h2>
+          {error && <p className="error">{error}</p>}
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button onClick={handleLogin} disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </div>
-        <div className="input-group">
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button onClick={handleLogin} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
       </div>
-    </div>
+    </>
   );
 }
 

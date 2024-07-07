@@ -1,8 +1,8 @@
 
 import { Route, Routes } from "react-router";
-import "./App.css";
 import Login from "./auth/Login";
 import Dashboard from "./dashboard/dashboard";
+import './index.css';
 
 function App() {
 

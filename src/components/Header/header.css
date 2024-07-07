@@ -1,0 +1,24 @@
+/* Header container styles */
+.header {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+/* Logo styles */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo-text {
+  color: #4299e1; /* Color of the logo text */
+}
+
+/* Nav menu styles */
+.nav-menu {
+  /* Add styles for navigation if needed */
+}
