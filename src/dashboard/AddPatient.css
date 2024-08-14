@@ -1,47 +1,58 @@
-.add-patient-page {
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 600px; /* Adjusted width */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.add-patient-page h2 {
+.add-patient-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.add-patient-modal h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.add-patient-page form {
+.add-patient-modal form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.add-patient-page label {
+.add-patient-modal label {
   margin-bottom: 10px;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.add-patient-page input {
+.add-patient-modal input {
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: calc(100% - 80px); /* Adjusted width to fit within the form */
-}
-
-.page-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
   width: 100%;
 }
 
-.page-buttons button {
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -49,11 +60,11 @@
   margin-left: 10px;
 }
 
-.page-buttons button:first-child {
+.modal-buttons button:first-child {
   background-color: #ccc;
 }
 
-.page-buttons button:last-child {
+.modal-buttons button:last-child {
   background-color: #007bff;
   color: #fff;
 }

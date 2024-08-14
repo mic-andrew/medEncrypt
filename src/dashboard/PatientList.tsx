@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { appointmentsData } from "../utils";
 import Modal from "../components/modals/Modal";
-import AddPatientModal from "../components/modals/AddPatientModal";
-import AddModal from "../components/modals/AddModal";
+import AddPatient from "./AddPatient";
 
 function PatientList() {
+  const [patients, setPatients] = useState(appointmentsData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [isAddPatientModalOpen, setIsAddPatientModalOpen] = useState(false);
+
   const addPatient = (patient) => {
+    setPatients([...patients, patient]);
     setIsAddPatientModalOpen(false);
-    console.log("Patient added", patient);
   };
 
   const handleRowClick = (patient) => {
@@ -22,87 +23,79 @@ function PatientList() {
     setIsModalOpen(false);
   };
 
-  const appointmentRows = appointmentsData.map((appointment, index) => (
+  const patientRows = patients.map((patient, index) => (
     <tr
       className="appointment-tr"
       key={index}
-      onClick={() => handleRowClick(appointment)}
+      onClick={() => handleRowClick(patient)}
     >
-      <td>{appointment.name}</td>
-      <td>{appointment.phone}</td>
-      <td>{appointment.date}</td>
-      <td>{appointment.age}</td>
-      <td>{appointment.clinic}</td>
-      <td>{appointment.diagnosis}</td>
+      <td>{patient.name}</td>
+      <td>{patient.phone}</td>
+      <td>{patient.date}</td>
+      <td>{patient.age}</td>
+      <td>{patient.clinic}</td>
+      <td>{patient.diagnosis}</td>
     </tr>
   ));
 
   return (
     <>
-    <AddModal />
       <main className="main-content">
         <div className="appointments">
-          <h3>Patients</h3>
-          {/* <div className="add-patient-btn">
-            <button className="bg-red-300 font-[900]">Add Patient</button>
-          </div> */}
+          <div className="patient-header">
+            <h3>Patients</h3>
+            <button
+              className="add-patient-button"
+              onClick={() => setIsAddPatientModalOpen(true)}
+            >
+              Add Patient
+            </button>
+          </div>
           <table>
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Date</th>
-                <th>Time</th>
+                <th>Age</th>
                 <th>Clinic</th>
                 <th>Diagnosis</th>
               </tr>
             </thead>
-            <tbody>{appointmentRows}</tbody>
+            <tbody>{patientRows}</tbody>
           </table>
         </div>
       </main>
-      <div className={`modal ${isModalOpen ? "active" : ""}`}>
-        <div className="modal-content">
-          <div className="modal-header">
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
+        {selectedPatient && (
+          <>
             <h2>Patient Details</h2>
-            <span className="modal-close" onClick={closeModal}>
-              &times;
-            </span>
-          </div>
-          {selectedPatient && (
-            <Modal isOpen={isModalOpen} closeModal={closeModal}>
-              {selectedPatient && (
-                <>
-                  <p>
-                    <strong>Name:</strong> {selectedPatient.name}
-                  </p>
-                  <p>
-                    <strong>Phone:</strong> {selectedPatient.phone}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {selectedPatient.date}
-                  </p>
-                  <p>
-                    <strong>Age </strong> {selectedPatient.age}
-                  </p>
-                  <p>
-                    <strong>Clinic:</strong> {selectedPatient.clinic}
-                  </p>
-                  <p>
-                    <strong>Diagnosis:</strong> {selectedPatient.diagnosis}
-                  </p>
-                </>
-              )}
-            </Modal>
-          )}
-        </div>
-
-        <AddPatientModal
-          isOpen={isAddPatientModalOpen}
-          closeModal={closeModal}
-          addPatient={addPatient}
-        />
-      </div>
+            <p>
+              <strong>Name:</strong> {selectedPatient.name}
+            </p>
+            <p>
+              <strong>Phone:</strong> {selectedPatient.phone}
+            </p>
+            <p>
+              <strong>Date:</strong> {selectedPatient.date}
+            </p>
+            <p>
+              <strong>Age:</strong> {selectedPatient.age}
+            </p>
+            <p>
+              <strong>Clinic:</strong> {selectedPatient.clinic}
+            </p>
+            <p>
+              <strong>Diagnosis:</strong> {selectedPatient.diagnosis}
+            </p>
+          </>
+        )}
+      </Modal>
+      <AddPatient
+        isOpen={isAddPatientModalOpen}
+        onClose={() => setIsAddPatientModalOpen(false)}
+        onAddPatient={addPatient}
+      />
     </>
   );
 }

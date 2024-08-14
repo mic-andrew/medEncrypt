@@ -10,8 +10,8 @@ function Dashboard() {
   return (
     <div className="container">
       <SideBar />
-      {/* <PatientList /> */}
-      <AddPatient />
+      <PatientList />
+      {/* <AddPatient /> */}
     </div>
   );
 }

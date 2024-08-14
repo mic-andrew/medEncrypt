@@ -198,9 +198,9 @@ html {
   cursor: pointer;
 }
 
-.appointments thead{
-    height: 4rem;
-    margin-bottom: 2rem;
+.appointments thead {
+  height: 4rem;
+  margin-bottom: 2rem;
 }
 
 .appointment-tr td {
@@ -208,7 +208,41 @@ html {
   padding-bottom: 2rem !important;
 }
 
+/* styles.css */
+.patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
 
+.patient-header h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
 
+.add-patient-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-patient-button:hover {
+  background-color: #0056b3;
+}
+
+.add-patient-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
 
 /* styles.css */
