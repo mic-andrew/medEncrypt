@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { appointmentsData } from "../utils";
 import Modal from "../components/modals/Modal";
 import AddPatientModal from "../components/modals/AddPatientModal";
+import AddModal from "../components/modals/AddModal";
 
 function PatientList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +31,7 @@ function PatientList() {
       <td>{appointment.name}</td>
       <td>{appointment.phone}</td>
       <td>{appointment.date}</td>
-      <td>{appointment.time}</td>
+      <td>{appointment.age}</td>
       <td>{appointment.clinic}</td>
       <td>{appointment.diagnosis}</td>
     </tr>
@@ -38,9 +39,10 @@ function PatientList() {
 
   return (
     <>
+    <AddModal />
       <main className="main-content">
         <div className="appointments">
-          <h3>Appointments</h3>
+          <h3>Patients</h3>
           {/* <div className="add-patient-btn">
             <button className="bg-red-300 font-[900]">Add Patient</button>
           </div> */}
@@ -81,7 +83,7 @@ function PatientList() {
                     <strong>Date:</strong> {selectedPatient.date}
                   </p>
                   <p>
-                    <strong>Time:</strong> {selectedPatient.time}
+                    <strong>Age </strong> {selectedPatient.age}
                   </p>
                   <p>
                     <strong>Clinic:</strong> {selectedPatient.clinic}
