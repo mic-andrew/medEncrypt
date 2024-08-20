@@ -1,119 +1,105 @@
-import React, { useState } from "react";
-import { appointmentsData } from "../utils";
-import Modal from "../components/modals/Modal";
+import React, { useState, useEffect } from "react";
+import ReactLoading from "react-loading";
 import AddPatient from "./AddPatient";
+import { API_BASE_URL } from "../utils";
 
-function PatientList() {
-  const [patients, setPatients] = useState(appointmentsData);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPatient, setSelectedPatient] = useState(null);
+const PatientList = () => {
+  const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [isAddPatientModalOpen, setIsAddPatientModalOpen] = useState(false);
 
-  const addPatient = (patient) => {
-    setPatients([...patients, patient]);
+  useEffect(() => {
+    fetchPatients();
+  }, []);
+
+  const fetchPatients = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/patients`);
+      const data = await response.json();
+      setPatients(data);
+    } catch (error) {
+      console.error("Error fetching patients:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addPatient = async (patientData) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/patients`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(patientData),
+      });
+      const newPatient = await response.json();
+      setPatients([...patients, newPatient]);
+    } catch (error) {
+      console.error("Error adding patient:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddPatient = (patientData) => {
+    addPatient(patientData);
     setIsAddPatientModalOpen(false);
   };
 
-  const handleRowClick = (patient) => {
-    setSelectedPatient(patient);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const patientRows = patients.map((patient, index) => (
-    <tr
-      className="hover:bg-gray-100 cursor-pointer"
-      key={index}
-      onClick={() => handleRowClick(patient)}
-    >
-      <td className="px-6 py-4 whitespace-nowrap">{patient.name}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{patient.phone}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{patient.date}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{patient.age}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{patient.clinic}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{patient.diagnosis}</td>
-    </tr>
-  ));
-
   return (
-    <>
-      <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-        <div className="mx-auto px-6 py-8">
-        <div className="flex justify-between items-center mb-6">
-            <h3 className="text-3xl font-medium text-gray-700">Patients</h3>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => setIsAddPatientModalOpen(true)}
-            >
-              Add Patient
-            </button>
-          </div>
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Phone
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Age
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Clinic
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Diagnosis
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {patientRows}
-              </tbody>
-            </table>
-          </div>
+    <div className="mx-auto px-4 py-8 w-full">
+      <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 rounded-md">
+        <h1 className="text-3xl font-bold">Patient List</h1>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => setIsAddPatientModalOpen(true)}
+        >
+          Add Patient
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <ReactLoading type="spin" color="#4299e1" height={50} width={50} />
         </div>
-      </main>
-      <Modal isOpen={isModalOpen} closeModal={closeModal}>
-        {selectedPatient && (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Patient Details</h2>
-            <p className="mb-2">
-              <strong>Name:</strong> {selectedPatient.name}
-            </p>
-            <p className="mb-2">
-              <strong>Phone:</strong> {selectedPatient.phone}
-            </p>
-            <p className="mb-2">
-              <strong>Date:</strong> {selectedPatient.date}
-            </p>
-            <p className="mb-2">
-              <strong>Age:</strong> {selectedPatient.age}
-            </p>
-            <p className="mb-2">
-              <strong>Clinic:</strong> {selectedPatient.clinic}
-            </p>
-            <p className="mb-2">
-              <strong>Diagnosis:</strong> {selectedPatient.diagnosis}
-            </p>
-          </div>
-        )}
-      </Modal>
+      ) : (
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 border-b">Name</th>
+              <th className="py-2 px-4 border-b">Phone</th>
+              <th className="py-2 px-4 border-b">Date</th>
+              <th className="py-2 px-4 border-b">Age</th>
+              <th className="py-2 px-4 border-b">Clinic</th>
+              <th className="py-2 px-4 border-b">Diagnosis</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patients.map((patient) => (
+              <tr key={patient._id}>
+                <td className="py-2 px-4 border-b">{patient.name}</td>
+                <td className="py-2 px-4 border-b">{patient.phone}</td>
+                <td className="py-2 px-4 border-b">{patient.date}</td>
+                <td className="py-2 px-4 border-b">{patient.age}</td>
+                <td className="py-2 px-4 border-b">{patient.clinic}</td>
+                <td className="py-2 px-4 border-b">{patient.diagnosis}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
       <AddPatient
         isOpen={isAddPatientModalOpen}
         onClose={() => setIsAddPatientModalOpen(false)}
-        onAddPatient={addPatient}
+        onAddPatient={handleAddPatient}
+        patientCount={patients.length}
       />
-    </>
+    </div>
   );
-}
+};
 
 export default PatientList;
