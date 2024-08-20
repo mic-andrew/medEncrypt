@@ -61,7 +61,7 @@ const DoctorsDashboard = () => {
   };
 
   return (
-    <div className=" mx-auto px-4 py-8">
+    <div className="mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold flex items-center text-gray-800">
           <FaUserMd className="mr-2 text-blue-500" />
@@ -98,9 +98,6 @@ const DoctorsDashboard = () => {
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Contact
-                </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Actions
                 </th>
               </tr>
             </thead>
@@ -144,14 +141,6 @@ const DoctorsDashboard = () => {
                     <p className="text-gray-900 whitespace-no-wrap">
                       {doctor.contact}
                     </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <button className="text-blue-600 hover:text-blue-900 mr-2">
-                      Edit
-                    </button>
-                    <button className="text-red-600 hover:text-red-900">
-                      Delete
-                    </button>
                   </td>
                 </tr>
               ))}

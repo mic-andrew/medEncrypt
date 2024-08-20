@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import AddPatient from "./AddPatient";
 import { API_BASE_URL } from "../utils";
+import { FaUserPlus } from "react-icons/fa";
 
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
@@ -50,13 +51,14 @@ const PatientList = () => {
   };
 
   return (
-    <div className="mx-auto px-4 py-8 w-full">
-      <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 rounded-md">
-        <h1 className="text-3xl font-bold">Patient List</h1>
+    <div className="mx-auto px-4 py-8">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-gray-800">Patient List</h1>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 flex items-center"
           onClick={() => setIsAddPatientModalOpen(true)}
         >
+          <FaUserPlus className="mr-2" />
           Add Patient
         </button>
       </div>
@@ -66,30 +68,68 @@ const PatientList = () => {
           <ReactLoading type="spin" color="#4299e1" height={50} width={50} />
         </div>
       ) : (
-        <table className="min-w-full bg-white">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border-b">Name</th>
-              <th className="py-2 px-4 border-b">Phone</th>
-              <th className="py-2 px-4 border-b">Date</th>
-              <th className="py-2 px-4 border-b">Age</th>
-              <th className="py-2 px-4 border-b">Clinic</th>
-              <th className="py-2 px-4 border-b">Diagnosis</th>
-            </tr>
-          </thead>
-          <tbody>
-            {patients.map((patient) => (
-              <tr key={patient._id}>
-                <td className="py-2 px-4 border-b">{patient.name}</td>
-                <td className="py-2 px-4 border-b">{patient.phone}</td>
-                <td className="py-2 px-4 border-b">{patient.date}</td>
-                <td className="py-2 px-4 border-b">{patient.age}</td>
-                <td className="py-2 px-4 border-b">{patient.clinic}</td>
-                <td className="py-2 px-4 border-b">{patient.diagnosis}</td>
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <table className="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Name
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Phone
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Date
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Age
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Clinic
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Diagnosis
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {patients.map((patient) => (
+                <tr key={patient._id} className="hover:bg-gray-50">
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {patient.name}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {patient.phone}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {patient.date}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {patient.age}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {patient.clinic}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {patient.diagnosis}
+                    </p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       <AddPatient
