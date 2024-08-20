@@ -14,6 +14,7 @@ function SideBar({ setShowLogoutModal }) {
   const menus = [
     { menu: "Dashboard", link: "/dashboard", icon: FaHome },
     { menu: "Patients", link: "/dashboard/patients", icon: FaUserInjured },
+    { menu: "Doctors", link: "/dashboard/doctors", icon: FaUserInjured },
     { menu: "K-Anonymity", link: "/dashboard/k-anonymity", icon: FaLock },
     { menu: "Analytics", link: "/dashboard/analytics", icon: FaChartBar },
     { menu: "Settings", link: "/dashboard/settings", icon: FaCog },

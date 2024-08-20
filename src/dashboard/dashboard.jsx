@@ -9,6 +9,7 @@ import LogoutModal from "./LogoutModal";
 import KAnonymity from "./KAnonymity";
 import Analytics from "./Analytics";
 import Settings from "./Settings";
+import DoctorsDashboard from "./Doctors";
 
 function Dashboard() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -28,6 +29,8 @@ function Dashboard() {
           <Routes>
             <Route index element={<DashboardHome />} />
             <Route path="patients" element={<PatientList />} />
+            <Route path="doctors" element={<DoctorsDashboard />} />
+
             <Route path="k-anonymity" element={<KAnonymity />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="settings" element={<Settings />} />
