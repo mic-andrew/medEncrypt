@@ -1,4 +1,6 @@
 /* dashboard.css */
+
+/* General Styles */
 body,
 html {
   margin: 0;
@@ -12,10 +14,7 @@ html {
   height: 100vh;
 }
 
-.menu {
-  margin-top: 4rem;
-}
-
+/* Sidebar Styles */
 .sidebar {
   width: 250px;
   background-color: #e3f2fd;
@@ -33,16 +32,17 @@ html {
   color: #007bff;
 }
 
-.sidebar .menu {
+.menu {
+  margin-top: 4rem;
   list-style: none;
   padding: 0;
 }
 
-.sidebar .menu li {
+.menu li {
   margin-bottom: 10px;
 }
 
-.sidebar .menu li a {
+.menu li a {
   text-decoration: none;
   color: #0f9491;
   font-size: 18px;
@@ -51,17 +51,13 @@ html {
   margin-bottom: 1.5rem;
   padding: 10px;
   border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.sidebar .menu li a:hover,
-.sidebar .menu li a.active {
+.menu li a:hover,
+.menu li a.active {
   background-color: #007bff;
   color: white;
-}
-
-.sidebar .menu li a:hover {
-  color: #007bff;
 }
 
 .sidebar .logout {
@@ -76,6 +72,7 @@ html {
   font-size: 18px;
 }
 
+/* Main Content Styles */
 .main-content {
   flex-grow: 1;
   padding: 20px;
@@ -101,6 +98,7 @@ html {
   border-radius: 5px;
 }
 
+/* Dashboard Stats Styles */
 .main-content .stats {
   display: flex;
   justify-content: space-between;
@@ -113,7 +111,12 @@ html {
   padding: 20px;
   border-radius: 5px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.main-content .stats .stat:hover {
+  transform: translateY(-5px);
 }
 
 .main-content .stats .stat h3 {
@@ -133,31 +136,41 @@ html {
   color: #999;
 }
 
+/* Appointments Table Styles */
 .main-content .appointments {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .main-content .appointments table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
 
 .main-content .appointments table th,
 .main-content .appointments table td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  padding: 15px;
   text-align: left;
 }
 
 .main-content .appointments table th {
   background-color: #f9fafb;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.main-content .appointments table tr {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
 }
 
 .main-content .appointments table tr:hover {
-  background-color: #f1f5f9;
+  transform: scale(1.02);
 }
 
 .main-content .appointments table td .status {
@@ -165,28 +178,25 @@ html {
   border-radius: 20px;
   font-size: 14px;
   text-align: center;
+  font-weight: bold;
 }
 
 .main-content .appointments table td .status.new {
   background-color: #e3f7e4;
   color: #34c759;
 }
-
 .main-content .appointments table td .status.accepted {
   background-color: #e6e9ff;
   color: #6c63ff;
 }
-
 .main-content .appointments table td .status.completed {
   background-color: #e5f7ff;
   color: #007aff;
 }
-
 .main-content .appointments table td .status.cancelled {
   background-color: #ffe6e6;
   color: #ff3b30;
 }
-
 .main-content .appointments table td .status.rejected {
   background-color: #ffefea;
   color: #ff3b30;
@@ -200,7 +210,6 @@ html {
 
 .appointments thead {
   height: 4rem;
-  margin-bottom: 2rem;
 }
 
 .appointment-tr td {
@@ -208,15 +217,16 @@ html {
   padding-bottom: 2rem !important;
 }
 
-/* styles.css */
+/* Patient List Styles */
 .patient-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   background-color: #f0f0f0;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .patient-header h3 {
@@ -233,16 +243,113 @@ html {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .add-patient-button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 .add-patient-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
-/* styles.css */
+/* Add Patient Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-patient-modal {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 600px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.add-patient-modal h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #007bff;
+}
+
+.add-patient-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-patient-modal label {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-patient-modal input {
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.add-patient-modal input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.modal-buttons button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 15px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-buttons button:first-child {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.modal-buttons button:last-child {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.modal-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #e0e0e0;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #0056b3;
+}

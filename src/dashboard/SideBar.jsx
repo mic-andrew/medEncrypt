@@ -1,38 +1,57 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  FaHome,
+  FaUserInjured,
+  FaLock,
+  FaChartBar,
+  FaCog,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
-function SideBar() {
+function SideBar({ setShowLogoutModal }) {
   const location = useLocation();
   const menus = [
-    { menu: "Dashboard", link: "/dashboard" },
-    { menu: "Appointments", link: "/appointments" },
-    { menu: "Doctors", link: "/doctors" },
-    { menu: "Patients", link: "/patients" },
-    { menu: "Reports", link: "/reports" },
-    { menu: "Settings", link: "/settings" },
-    { menu: "Dark Mode", link: "/dark-mode" },
-    { menu: "Logout", link: "/logout" },
+    { menu: "Dashboard", link: "/dashboard", icon: FaHome },
+    { menu: "Patients", link: "/dashboard/patients", icon: FaUserInjured },
+    { menu: "K-Anonymity", link: "/dashboard/k-anonymity", icon: FaLock },
+    { menu: "Analytics", link: "/dashboard/analytics", icon: FaChartBar },
+    { menu: "Settings", link: "/dashboard/settings", icon: FaCog },
   ];
 
   return (
-    <aside className="sidebar">
-      <div>
-        <h2>MedCrypt</h2>
-        <ul className="menu">
+    <aside className="bg-gray-800 text-white w-64 min-h-screen p-4">
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold">MedCrypt</h2>
+      </div>
+      <nav>
+        <ul className="space-y-2">
           {menus.map((menu, index) => {
             const isActive = location.pathname === menu.link;
             return (
               <li key={index}>
-                <Link to={menu.link} className={isActive ? "active" : ""}>
+                <Link
+                  to={menu.link}
+                  className={`flex items-center p-2 rounded-lg ${
+                    isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                  }`}
+                >
+                  <menu.icon className="mr-3" />
                   {menu.menu}
                 </Link>
               </li>
             );
           })}
         </ul>
-      </div>
-      <div className="logout">
-        <a href="#logout">Logout</a>
+      </nav>
+      <div className="mt-auto pt-8">
+        <button
+          onClick={() => setShowLogoutModal(true)}
+          className="flex items-center p-2 rounded-lg hover:bg-gray-700 w-full"
+        >
+          <FaSignOutAlt className="mr-3" />
+          Logout
+        </button>
       </div>
     </aside>
   );
