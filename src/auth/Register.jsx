@@ -105,11 +105,11 @@ function Register() {
             label="License Number"
           />
           <Input
-            id="yearsOfExperience"
-            name="yearsOfExperience"
+            id="experience"
+            name="experience"
             type="number"
             placeholder="Years of Experience"
-            value={formData.yearsOfExperience}
+            value={formData.experience}
             onChange={handleChange}
             icon={FaHospital}
             label="Years of Experience"
