@@ -81,4 +81,26 @@ export const appointmentsData = [
   },
 ];
 
-export const API_BASE_URL = "https://schoolnode-fsto.onrender.com/med-crypt";
+export const DOCTORS_DEPARTMENTS= [
+  "Cardiology",
+  "Neurology",
+  "Pediatrics",
+  "Oncology",
+  "Orthopedics",
+  "Gynecology",
+  "Dermatology",
+  "Psychiatry",
+  "Urology",
+  "Ophthalmology",
+  "Endocrinology",
+  "Gastroenterology",
+  "Pulmonology",
+  "Nephrology",
+  "Hematology"
+];
+
+
+// export const API_BASE_URL = "https://schoolnode-fsto.onrender.com/med-crypt";
+
+export const API_BASE_URL = 'http://localhost:8000/med-crypt';
+export const AUTH_BASE_URL = "http://localhost:8000/auth";

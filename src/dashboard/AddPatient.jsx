@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Input from "../components/Input/Input";
+import { API_BASE_URL } from "../utils";
 
 const AddPatient = ({ isOpen, onClose, onAddPatient, patientCount }) => {
   const [formData, setFormData] = useState({
@@ -8,8 +10,23 @@ const AddPatient = ({ isOpen, onClose, onAddPatient, patientCount }) => {
     date: "",
     age: "",
     clinic: "",
-    diagnosis: "",
+    doctorId: "",
   });
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+
+  const fetchDoctors = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/doctors`);
+      const data = await response.json();
+      setDoctors(data);
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,7 +41,7 @@ const AddPatient = ({ isOpen, onClose, onAddPatient, patientCount }) => {
       date: data.date,
       age: data.age,
       clinic: data.clinic,
-      diagnosis: data.diagnosis,
+      doctorId: data.doctorId,
     };
   };
 
@@ -37,12 +54,23 @@ const AddPatient = ({ isOpen, onClose, onAddPatient, patientCount }) => {
       date: "",
       age: "",
       clinic: "",
-      diagnosis: "",
+
+      doctorId: "",
     });
     onClose();
   };
 
   if (!isOpen) return null;
+
+  const clinics = [
+    { id: "1", name: "Surgery" },
+    { id: "2", name: "Cardiology" },
+    { id: "3", name: "Pediatrics" },
+    { id: "4", name: "Orthopedics" },
+    { id: "5", name: "Dermatology" },
+    { id: "6", name: "Neurology" },
+    { id: "7", name: "Oncology" },
+  ];
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full z-50">
@@ -52,19 +80,60 @@ const AddPatient = ({ isOpen, onClose, onAddPatient, patientCount }) => {
             Add Patient
           </h3>
           <form className="mt-2 text-left">
-            {Object.entries(formData).map(([key, value]) => (
-              <div key={key} className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor={key}
-                >
-                  {key.charAt(0).toUpperCase() + key.slice(1)}:
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {Object.entries(formData).map(([key, value]) => {
+                if (key === "clinic") {
+                  return (
+                    <div key={key} className="mb-4">
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={key}>
+                        Clinic:
+                      </label>
+                      <select
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id={key}
+                        name={key}
+                        value={value}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select a clinic</option>
+                        {clinics.map((clinic) => (
+                          <option key={clinic.id} value={clinic.name}>
+                            {clinic.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  );
+                }
+              if (key === "doctorId") {
+                return (
+                  <div key={key} className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={key}>
+                      Doctor:
+                    </label>
+                    <select
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id={key}
+                      name={key}
+                      value={value}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select a doctor</option>
+                      {doctors.map((doctor) => (
+                        <option key={doctor._id} value={doctor._id}>
+                          {doctor.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                );
+              }
+              return (
+                <Input
+                  key={key}
                   id={key}
-                  type="text"
                   name={key}
+                  type="text"
+                  label={key.charAt(0).toUpperCase() + key.slice(1)}
                   value={value}
                   onChange={handleChange}
                   placeholder={
@@ -81,8 +150,8 @@ const AddPatient = ({ isOpen, onClose, onAddPatient, patientCount }) => {
                         }`
                   }
                 />
-              </div>
-            ))}
+              );
+            })}
           </form>
           <div className="items-center px-4 py-3">
             <button
