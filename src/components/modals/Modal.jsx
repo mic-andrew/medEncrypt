@@ -1,5 +1,5 @@
-import React from "react";
 import "./modal.css";
+import propTypes from "prop-types";
 
 
 
@@ -20,3 +20,9 @@ function Modal({ children, isOpen, closeModal }) {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  children: propTypes.node.isRequired,
+  isOpen: propTypes.bool.isRequired,
+  closeModal: propTypes.func.isRequired,
+}

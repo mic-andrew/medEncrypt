@@ -1,4 +1,4 @@
-import React from "react";
+// src/components/SideBar.js
 import { Link, useLocation } from "react-router-dom";
 import {
   FaHome,
@@ -9,17 +9,41 @@ import {
   FaSignOutAlt,
   FaUserMd,
 } from "react-icons/fa";
+import PropTypes from "prop-types";
+import { useAuth } from "../context/authContext";
 
 function SideBar({ setShowLogoutModal }) {
   const location = useLocation();
-  const menus = [
-    { menu: "Dashboard", link: "/dashboard", icon: FaHome },
-    { menu: "Patients", link: "/dashboard/patients", icon: FaUserInjured },
-    { menu: "Doctors", link: "/dashboard/doctors", icon: FaUserMd },
-    { menu: "K-Anonymity", link: "/dashboard/k-anonymity", icon: FaLock },
-    { menu: "Analytics", link: "/dashboard/analytics", icon: FaChartBar },
-    { menu: "Settings", link: "/dashboard/settings", icon: FaCog },
-  ];
+  const { user } = useAuth();
+
+  const getMenus = () => {
+    const commonMenus = [
+      { menu: "Dashboard", link: "/dashboard", icon: FaHome },
+      { menu: "Analytics", link: "/dashboard/analytics", icon: FaChartBar },
+    ];
+
+    const adminMenus = [
+      { menu: "Patients", link: "/dashboard/patients", icon: FaUserInjured },
+      { menu: "Doctors", link: "/dashboard/doctors", icon: FaUserMd },
+      { menu: "K-Anonymity", link: "/dashboard/k-anonymity", icon: FaLock },
+      { menu: "Settings", link: "/dashboard/settings", icon: FaCog },
+    ];
+
+    const doctorMenus = [
+      { menu: "My Patients", link: "/dashboard/my-patients", icon: FaUserInjured },
+    ];
+
+    switch (user?.userType) {
+      case 'admin':
+        return [...commonMenus, ...adminMenus];
+      case 'doctor':
+        return [...commonMenus, ...doctorMenus];
+      default:
+        return commonMenus;
+    }
+  };
+
+  const menus = getMenus();
 
   return (
     <aside className="bg-gray-800 text-white w-64 min-h-screen p-4">
@@ -58,5 +82,9 @@ function SideBar({ setShowLogoutModal }) {
     </aside>
   );
 }
+
+SideBar.propTypes = {
+  setShowLogoutModal: PropTypes.func.isRequired,
+};
 
 export default SideBar;
