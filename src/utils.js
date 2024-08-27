@@ -102,5 +102,8 @@ export const DOCTORS_DEPARTMENTS= [
 
 // export const API_BASE_URL = "https://schoolnode-fsto.onrender.com/med-crypt";
 
-export const API_BASE_URL = 'http://localhost:8000/med-crypt';
-export const AUTH_BASE_URL = "http://localhost:8000/auth";
+// export const API_BASE_URL = 'http://localhost:8000/med-crypt';
+// export const AUTH_BASE_URL = "http://localhost:8000/auth";
+
+export const API_BASE_URL ="https://medcryptbackend.onrender.com/med-crypt";
+export const AUTH_BASE_URL = "https://medcryptbackend.onrender.com/auth";
